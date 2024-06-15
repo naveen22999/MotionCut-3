@@ -1,0 +1,108 @@
+
+import java.util.Scanner;
+
+public class TextAdventureGame {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String playerName;
+
+        
+        System.out.println("Welcome to the Text Adventure Game!");
+        System.out.print("Enter your name: ");
+        playerName = scanner.nextLine();
+        System.out.println("\nHello, " + playerName + "! Let's begin the adventure.\n");
+
+        
+        startGame(scanner);
+
+        
+        scanner.close();
+    }
+
+    public static void startGame(Scanner scanner) {
+        
+        System.out.println("You wake up in a mysterious forest with two paths ahead of you.");
+
+        
+        System.out.println("What do you do?");
+        System.out.println("1. Take the path to the left.");
+        System.out.println("2. Take the path to the right.");
+        int choice = getUserChoice(scanner, 1, 2);
+
+        if (choice == 1) {
+            pathLeft(scanner);
+        } else if (choice == 2) {
+            pathRight(scanner);
+        }
+    }
+
+    public static void pathLeft(Scanner scanner) {
+       
+        System.out.println("\nYou chose the path to the left.");
+        System.out.println("You encounter a friendly wizard who offers you a magical potion.");
+
+       
+        System.out.println("What do you do?");
+        System.out.println("1. Accept the potion.");
+        System.out.println("2. Decline the potion.");
+        int choice = getUserChoice(scanner, 1, 2);
+
+        if (choice == 1) {
+            System.out.println("\nThe wizard smiles and gives you the potion. You feel a surge of energy.");
+            
+            System.out.println("You continue on your journey.");
+        } else if (choice == 2) {
+            System.out.println("\nThe wizard nods and you continue on your journey without the potion.");
+          
+            System.out.println("You continue exploring the forest.");
+        }
+    }
+
+    public static void pathRight(Scanner scanner) {
+        
+        System.out.println("\nYou chose the path to the right.");
+        System.out.println("You come across a dark cave entrance with a sign that says 'Enter at your own risk'.");
+
+       
+        System.out.println("What do you do?");
+        System.out.println("1. Enter the cave.");
+        System.out.println("2. Avoid the cave and continue through the forest.");
+        int choice = getUserChoice(scanner, 1, 2);
+
+        if (choice == 1) {
+            System.out.println("\nYou cautiously enter the cave, your heart pounding.");
+           
+            System.out.println("Inside, you find hidden treasures and a mysterious artifact.");
+            System.out.println("You emerge from the cave richer and with a powerful artifact.");
+        } else if (choice == 2) {
+            System.out.println("\nYou decide to avoid the cave and explore more of the forest.");
+           
+            System.out.println("You discover a beautiful waterfall and a peaceful clearing.");
+            System.out.println("You spend some time relaxing before continuing your journey.");
+        }
+    }
+
+    public static int getUserChoice(Scanner scanner, int minChoice, int maxChoice) {
+        int choice = 0;
+        boolean isValidInput = false;
+
+
+        while (!isValidInput) {
+            System.out.print("Enter your choice (" + minChoice + "-" + maxChoice + "): ");
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= minChoice && choice <= maxChoice) {
+                    isValidInput = true;
+                } else {
+                    System.out.println("Invalid input! Please enter a number between " + minChoice + " and " + maxChoice + ".");
+                }
+            } else {
+                System.out.println("Invalid input! Please enter a number.");
+                scanner.next(); 
+            }
+        }
+        scanner.nextLine(); 
+        return choice;
+    }
+}
